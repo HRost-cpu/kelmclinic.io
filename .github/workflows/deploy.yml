@@ -1,0 +1,47 @@
+# GitHub Actions для автоматичного розгортання Next.js сайту на GitHub Pages
+
+name: Deploy to GitHub Pages
+
+# Запускати цей workflow при кожному пуші в гілку `main`
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Крок 1: Перевірка та завантаження коду
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Крок 2: Налаштування Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # Крок 3: Встановлення залежностей
+      - name: Install dependencies
+        run: npm ci
+
+      # Крок 4: Збірка та експорт сайту
+      - name: Build and export
+        run: npm run build && npm run export
+
+      # Крок 5: Додавання .nojekyll для коректної роботи GitHub Pages
+      - name: Add .nojekyll file
+        run: touch out/.nojekyll
+
+      # Крок 6: Розгортання на GitHub Pages
+      # Використовуємо спеціальну дію, яка автоматично завантажує вміст папки 'out'
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+
