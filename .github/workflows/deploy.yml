@@ -20,16 +20,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
 
       # Крок 3: Встановлення залежностей
       # Використовуємо 'npm install', щоб уникнути помилки, пов'язаної з відсутністю package-lock.json
-      - name: Install dependencies
-        run: npm install
+      #- name: Install dependencies
+      #run: npm install
 
       # Крок 4: Збірка та експорт сайту
-      - name: Build and export
-        run: npm run build && npm run export
+      #- name: Build and export
+        #run: npm run build && npm run export
 
       # Крок 5: Додавання .nojekyll для коректної роботи GitHub Pages
       - name: Add .nojekyll file
