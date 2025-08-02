@@ -25,8 +25,9 @@ jobs:
           cache: 'npm'
 
       # Крок 3: Встановлення залежностей
+      # Використовуємо 'npm install', щоб уникнути помилки, пов'язаної з відсутністю package-lock.json
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # Крок 4: Збірка та експорт сайту
       - name: Build and export
