@@ -1,5 +1,3 @@
-# GitHub Actions для автоматичного розгортання Next.js сайту на GitHub Pages
-
 name: Deploy to GitHub Pages
 
 # Запускати цей workflow при кожному пуші в гілку `main`
